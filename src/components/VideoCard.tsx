@@ -17,6 +17,7 @@ const CATEGORY_COLORS: Record<string, string> = {
   science:  '#6BCB77',
   english:  '#4ECDC4',
   urdu:     '#FF9F43',
+  hindi:    '#F97316',
 };
 
 export default function VideoCard({ video, delay = 0 }: Props) {
@@ -57,7 +58,13 @@ export default function VideoCard({ video, delay = 0 }: Props) {
 
         {/* Language Badge */}
         <span className={styles.langBadge}>
-          {video.language === 'urdu' ? '🇵🇰 Urdu' : '🇬🇧 Eng'}
+          {video.language === 'urdu'
+            ? '🇵🇰 Urdu'
+            : video.language === 'hindi'
+            ? '🇮🇳 Hindi'
+            : video.language === 'both'
+            ? '🌐 Dual'
+            : '🇬🇧 Eng'}
         </span>
 
         <div className={styles.overlay}>

@@ -25,7 +25,7 @@ export default function Home() {
 
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCat, setSelectedCat] = useState<string>('all');
-  const [selectedLang, setSelectedLang] = useState<'all' | 'english' | 'urdu'>('all');
+  const [selectedLang, setSelectedLang] = useState<'all' | 'english' | 'urdu' | 'hindi'>('all');
 
   // Filter available categories (hide parent-blocked ones)
   const availableCategories = useMemo(() => {
@@ -231,6 +231,15 @@ export default function Home() {
                 }}
               >
                 🇵🇰 Urdu
+              </button>
+              <button
+                className={`${styles.filterPill} ${selectedLang === 'hindi' ? styles.filterPillActive : ''}`}
+                onClick={() => {
+                  sound.playPop();
+                  setSelectedLang(selectedLang === 'hindi' ? 'all' : 'hindi');
+                }}
+              >
+                🇮🇳 Hindi
               </button>
               <button
                 className={`${styles.filterPill} ${selectedLang === 'english' ? styles.filterPillActive : ''}`}
