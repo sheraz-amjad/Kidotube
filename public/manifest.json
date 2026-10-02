@@ -1,0 +1,37 @@
+{
+  "name": "KidoTube Safe - Kids Learning & Fun",
+  "short_name": "KidoTube",
+  "description": "Safe, ad-free learning and entertainment for kids aged 6-10 with parent controls.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f8fafc",
+  "theme_color": "#2563eb",
+  "orientation": "any",
+  "categories": ["education", "kids", "entertainment"],
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "My Notebook",
+      "url": "/notebook",
+      "description": "Drawing pad and handwriting practice"
+    },
+    {
+      "name": "Fun Mini Games",
+      "url": "/games",
+      "description": "9 educational mini games"
+    }
+  ]
+}

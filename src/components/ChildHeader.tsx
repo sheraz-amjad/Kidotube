@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { useApp, ThemeName } from '@/lib/context';
 import { useState, useRef, useEffect } from 'react';
 import { sound } from '@/lib/sound';
@@ -62,6 +63,7 @@ export default function ChildHeader() {
   const [avatarOpen, setAvatarOpen] = useState(false);
   const [themeOpen, setThemeOpen] = useState(false);
   const [showTrophies, setShowTrophies] = useState(false);
+  const pathname = usePathname();
 
   const avatarRef = useRef<HTMLDivElement>(null);
   const themeRef = useRef<HTMLDivElement>(null);
@@ -177,27 +179,27 @@ export default function ChildHeader() {
 
           {/* Right side controls */}
           <div className={styles.right}>
-            {/* Notebook link */}
-            <Link href="/notebook" className={styles.notebookLink} title="My Handwriting & Drawing Notebook">
+            {/* Notebook link (Desktop) */}
+            <Link href="/notebook" className={`${styles.notebookLink} ${styles.desktopOnly}`} title="My Handwriting & Drawing Notebook">
               <span>📓</span>
               <span>Notebook</span>
             </Link>
 
-            {/* Kids Corner link */}
-            <Link href="/corner" className={styles.cornerLink} title="Safe Kids Corner Community">
+            {/* Kids Corner link (Desktop) */}
+            <Link href="/corner" className={`${styles.cornerLink} ${styles.desktopOnly}`} title="Safe Kids Corner Community">
               <span>🎨</span>
               <span>Corner</span>
             </Link>
 
-            {/* Streak Badge */}
-            <div className={styles.streakBadge} title={`Daily Study Streak: ${streak} days!`}>
+            {/* Streak Badge (Desktop) */}
+            <div className={`${styles.streakBadge} ${styles.desktopOnly}`} title={`Daily Study Streak: ${streak} days!`}>
               <span>🔥</span>
               <span>{streak}d</span>
             </div>
 
-            {/* Lullaby audio button */}
+            {/* Lullaby audio button (Desktop) */}
             <button
-              className={styles.iconBtn}
+              className={`${styles.iconBtn} ${styles.desktopOnly}`}
               onClick={toggleLullaby}
               title={isLullabyPlaying ? 'Playing Bedtime Lullaby' : 'Play Soothing Lullaby 🌙'}
               aria-label="Play Lullaby"
@@ -205,7 +207,7 @@ export default function ChildHeader() {
               {isLullabyPlaying ? '🎶' : '🌙'}
             </button>
 
-            {/* Sound Toggle */}
+            {/* Sound Toggle (Always accessible) */}
             <button
               className={styles.iconBtn}
               onClick={toggleSound}
@@ -215,9 +217,9 @@ export default function ChildHeader() {
               {soundEnabled ? '🔊' : '🔇'}
             </button>
 
-            {/* Trophies & Badges Button */}
+            {/* Trophies & Badges Button (Desktop) */}
             <button
-              className={styles.badgeNavBtn}
+              className={`${styles.badgeNavBtn} ${styles.desktopOnly}`}
               onClick={() => {
                 sound.playStar();
                 setShowTrophies(true);
@@ -228,20 +230,26 @@ export default function ChildHeader() {
               <span>{badges.length}</span>
             </button>
 
-            {/* Favorites link */}
-            <Link href="/#favorites" className={styles.navLink} title="My Favorite Videos">
+            {/* Favorites link (Desktop) */}
+            <Link href="/#favorites" className={`${styles.navLink} ${styles.desktopOnly}`} title="My Favorite Videos">
               <span>💖</span>
               <span>{favorites.length}</span>
             </Link>
 
-            {/* Stars */}
+            {/* Stars counter (Always accessible) */}
             <div className={styles.stars} title={`${stars} Stars earned!`}>
               <span className={styles.starIcon}>⭐</span>
               <span className={styles.starCount}>{stars}</span>
             </div>
 
-            {/* Parents link */}
-            <Link href="/parent" className={styles.parentBtn}>
+            {/* Download App link (Desktop) */}
+            <Link href="/download" className={`${styles.navLink} ${styles.desktopOnly}`} title="Get Mobile App">
+              <span>📱</span>
+              <span>App</span>
+            </Link>
+
+            {/* Parents link (Always accessible) */}
+            <Link href="/parent" className={styles.parentBtn} title="Parent Settings & Controls">
               <span>👨‍👩‍👧</span>
               <span>Parents</span>
             </Link>
@@ -327,6 +335,54 @@ export default function ChildHeader() {
           </div>
         </div>
       )}
+
+      {/* Mobile App Bottom Navigation Bar (Fixed for phones like 6 Pro & small screens) */}
+      <nav className={styles.mobileBottomNav} aria-label="Mobile Navigation">
+        <Link
+          href="/"
+          className={`${styles.bottomNavItem} ${pathname === '/' ? styles.bottomNavActive : ''}`}
+          title="Home"
+        >
+          <span className={styles.bottomNavIcon}>🏠</span>
+          <span className={styles.bottomNavLabel}>Home</span>
+        </Link>
+
+        <Link
+          href="/games"
+          className={`${styles.bottomNavItem} ${pathname?.startsWith('/games') ? styles.bottomNavActive : ''}`}
+          title="Fun Mini Games"
+        >
+          <span className={styles.bottomNavIcon}>🎮</span>
+          <span className={styles.bottomNavLabel}>Games</span>
+        </Link>
+
+        <Link
+          href="/notebook"
+          className={`${styles.bottomNavItem} ${pathname === '/notebook' ? styles.bottomNavActive : ''}`}
+          title="Handwriting & Drawing Notebook"
+        >
+          <span className={styles.bottomNavIcon}>📓</span>
+          <span className={styles.bottomNavLabel}>Notebook</span>
+        </Link>
+
+        <Link
+          href="/corner"
+          className={`${styles.bottomNavItem} ${pathname === '/corner' ? styles.bottomNavActive : ''}`}
+          title="Kids Corner Community"
+        >
+          <span className={styles.bottomNavIcon}>🎨</span>
+          <span className={styles.bottomNavLabel}>Corner</span>
+        </Link>
+
+        <Link
+          href="/download"
+          className={`${styles.bottomNavItem} ${pathname === '/download' ? styles.bottomNavActive : ''}`}
+          title="Get the Mobile App"
+        >
+          <span className={styles.bottomNavIcon}>📱</span>
+          <span className={styles.bottomNavLabel}>App</span>
+        </Link>
+      </nav>
     </>
   );
 }
