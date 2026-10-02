@@ -201,7 +201,7 @@ function VideosTab() {
   const [newYtId, setNewYtId] = useState('');
   const [newCat, setNewCat] = useState<ContentCategory>('cartoons');
   const [newAge, setNewAge] = useState<AgeGroup>('all');
-  const [newLang, setNewLang] = useState<'english' | 'urdu' | 'both'>('english');
+  const [newLang, setNewLang] = useState<'english' | 'urdu' | 'hindi' | 'both'>('english');
   const [newDuration, setNewDuration] = useState('8');
   const [newDesc, setNewDesc] = useState('');
 
@@ -373,11 +373,12 @@ function VideosTab() {
                   <select
                     className={styles.input}
                     value={newLang}
-                    onChange={(e) => setNewLang(e.target.value as 'english' | 'urdu' | 'both')}
+                    onChange={(e) => setNewLang(e.target.value as 'english' | 'urdu' | 'hindi' | 'both')}
                   >
                     <option value="english">🇬🇧 English</option>
                     <option value="urdu">🇵🇰 Urdu</option>
-                    <option value="both">Both</option>
+                    <option value="hindi">🇮🇳 Hindi</option>
+                    <option value="both">Both / Dual</option>
                   </select>
                 </div>
 

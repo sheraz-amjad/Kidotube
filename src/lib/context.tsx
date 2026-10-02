@@ -35,7 +35,7 @@ export interface NotebookEntry {
   previewUrl: string;
   date: string;
   notes?: string;
-  language?: 'english' | 'urdu';
+  language?: 'english' | 'urdu' | 'hindi';
 }
 
 export interface CornerPost {

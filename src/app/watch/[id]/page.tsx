@@ -168,7 +168,13 @@ function WatchContent({ videoId }: { videoId: string }) {
                     Ages {video.ageGroup === 'all' ? '6–10' : video.ageGroup}
                   </span>
                   <span className={styles.langBadge}>
-                    {video.language === 'urdu' ? '🇵🇰 Urdu' : '🇬🇧 English'}
+                    {video.language === 'urdu'
+                      ? '🇵🇰 Urdu'
+                      : video.language === 'hindi'
+                      ? '🇮🇳 Hindi'
+                      : video.language === 'both'
+                      ? '🌐 Bilingual'
+                      : '🇬🇧 English'}
                   </span>
 
                   {/* Actions: Favorite, Speak, & Theater Mode */}

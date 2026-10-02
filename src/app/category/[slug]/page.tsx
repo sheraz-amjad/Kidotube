@@ -12,7 +12,7 @@ import styles from './page.module.css';
 function CategoryContent({ slug }: { slug: string }) {
   const category = getCategoryById(slug);
   const { isCategoryBlocked, customVideos, ageFilter } = useApp();
-  const [langFilter, setLangFilter] = useState<'all' | 'english' | 'urdu'>('all');
+  const [langFilter, setLangFilter] = useState<'all' | 'english' | 'urdu' | 'hindi'>('all');
 
   if (!category) return notFound();
 
@@ -83,6 +83,13 @@ function CategoryContent({ slug }: { slug: string }) {
                 onClick={() => setLangFilter('urdu')}
               >
                 🇵🇰 Urdu
+              </button>
+              <button
+                className={`${styles.homeBtn} ${langFilter === 'hindi' ? '' : styles.filterOutline}`}
+                style={{ padding: '8px 18px', fontSize: '13px' }}
+                onClick={() => setLangFilter('hindi')}
+              >
+                🇮🇳 Hindi
               </button>
             </div>
 

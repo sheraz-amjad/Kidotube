@@ -13,6 +13,12 @@ const URDU_ALPHABET = [
   'ض', 'ط', 'ظ', 'ع', 'غ', 'ف', 'ق', 'ک', 'گ', 'ل',
   'م', 'ن', 'و', 'ہ', 'ء', 'ی', 'ے'
 ];
+const HINDI_ALPHABET = [
+  'अ', 'आ', 'इ', 'ई', 'उ', 'ऊ', 'ए', 'ऐ', 'ओ', 'औ',
+  'क', 'ख', 'ग', 'घ', 'च', 'छ', 'ज', 'झ', 'ट', 'ठ',
+  'ड', 'ढ', 'त', 'थ', 'द', 'ध', 'न', 'प', 'फ', 'ब',
+  'भ', 'म', 'य', 'र', 'ल', 'व', 'श', 'ष', 'स', 'ह'
+];
 
 const DRAW_TEMPLATES = [
   { id: 'cat',       name: 'Kitten 🐱', steps: ['Head Circle', 'Triangle Ears', 'Cute Whiskers & Eyes', 'Smiling Mouth'] },
@@ -38,7 +44,7 @@ export default function NotebookPage() {
   } = useApp();
 
   const [activeTab, setActiveTab] = useState<'tracing' | 'draw_along' | 'notes' | 'gallery'>('tracing');
-  const [lang, setLang] = useState<'english' | 'urdu'>('english');
+  const [lang, setLang] = useState<'english' | 'urdu' | 'hindi'>('english');
   const [selectedLetter, setSelectedLetter] = useState('A');
   const [selectedTemplate, setSelectedTemplate] = useState(DRAW_TEMPLATES[0]);
   const [drawStep, setDrawStep] = useState(1);
@@ -80,7 +86,12 @@ export default function NotebookPage() {
       ctx.setLineDash([]);
 
       // Draw faint dotted tracing letter
-      ctx.font = lang === 'urdu' ? '180px sans-serif' : 'bold 160px "Fredoka One", cursive';
+      ctx.font =
+        lang === 'urdu'
+          ? '180px sans-serif'
+          : lang === 'hindi'
+          ? 'bold 150px "Outfit", sans-serif'
+          : 'bold 160px "Fredoka One", cursive';
       ctx.fillStyle = '#E2E8F0';
       ctx.textAlign = 'center';
       ctx.textBaseline = 'middle';
@@ -204,6 +215,8 @@ export default function NotebookPage() {
     sound.playPop();
     if (lang === 'urdu') {
       sound.speak(`حرف ${selectedLetter}`);
+    } else if (lang === 'hindi') {
+      sound.speak(`अक्षर ${selectedLetter}`);
     } else {
       sound.speak(`Letter ${selectedLetter}`);
     }
@@ -216,7 +229,7 @@ export default function NotebookPage() {
     const dataUrl = canvas.toDataURL();
     const title =
       activeTab === 'tracing'
-        ? `${lang === 'urdu' ? 'Urdu' : 'English'} Tracing: ${selectedLetter}`
+        ? `${lang === 'urdu' ? 'Urdu' : lang === 'hindi' ? 'Hindi' : 'English'} Tracing: ${selectedLetter}`
         : activeTab === 'draw_along'
         ? `Draw Along: ${selectedTemplate.name}`
         : noteTitle;
@@ -356,6 +369,15 @@ export default function NotebookPage() {
                     >
                       🇵🇰 Urdu (حروف تہجی)
                     </button>
+                    <button
+                      className={`${styles.subBtn} ${lang === 'hindi' ? styles.subBtnActive : ''}`}
+                      onClick={() => {
+                        setLang('hindi');
+                        setSelectedLetter('अ');
+                      }}
+                    >
+                      🇮🇳 Hindi (वर्णमाला)
+                    </button>
 
                     <button
                       className={styles.subBtn}
@@ -368,7 +390,7 @@ export default function NotebookPage() {
 
                   {/* Letter carousel */}
                   <div className={styles.lettersScroll}>
-                    {(lang === 'english' ? ENGLISH_ALPHABET : URDU_ALPHABET).map((ltr) => (
+                    {(lang === 'english' ? ENGLISH_ALPHABET : lang === 'urdu' ? URDU_ALPHABET : HINDI_ALPHABET).map((ltr) => (
                       <button
                         key={ltr}
                         className={`${styles.letterChip} ${selectedLetter === ltr ? styles.letterChipActive : ''}`}
