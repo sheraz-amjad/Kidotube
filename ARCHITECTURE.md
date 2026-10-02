@@ -106,3 +106,26 @@ KidoTube implements a client-side procedural sound synthesizer using the Web Aud
    - If navigated to directly via URL, [category/[slug]/page.tsx](file:///d:/kidotube/src/app/category/%5Bslug%5D/page.tsx) and [watch/[id]/page.tsx](file:///d:/kidotube/src/app/watch/%5Bid%5D/page.tsx) display a friendly "Locked by Parents" banner instead of rendering the content.
 3. **Bedtime Enforcement**: When the local device time passes the scheduled `bedtimeHour`, video and game access is replaced with a soothing bedtime prompt.
 4. **Parent PIN Protection**: All parental controls require PIN entry, with visual shake feedback on failures and in-memory session protection.
+
+---
+
+## 6. Server Infrastructure & CI/CD Pipeline
+
+### 6.1 Server Architecture
+- **Host**: AWS EC2 Ubuntu Server (`15.252.239.115`)
+- **Process Manager**: PM2 running Next.js production server on `127.0.0.1:3000` under process name `kidotube`.
+- **Reverse Proxy**: Nginx 1.28 (`/etc/nginx/sites-available/kidotube.syedsheraz.me`) proxying to `http://127.0.0.1:3000`.
+- **SSL / TLS**: Cloudflare Origin SSL certificates (`/etc/cloudflare/cert.pem` and `/etc/cloudflare/key.pem`) covering `*.syedsheraz.me`.
+- **Domain**: `https://kidotube.syedsheraz.me` (with automated 301 redirect from HTTP port 80).
+
+### 6.2 GitHub Actions Pipeline (`.github/workflows/deploy.yml`)
+- Triggered automatically on push to `main` branch.
+- Steps:
+  1. Checks out repository and sets up Node 22.
+  2. Runs `npm ci` and `npm run build` to validate compilation.
+  3. Prepares server directory `/var/www/kidotube`.
+  4. Syncs production artifacts (`.next`, `public`, `package.json`, `package-lock.json`, `next.config.ts`) using `appleboy/scp-action`.
+  5. Runs `npm ci --omit=dev`, reloads PM2 (`pm2 reload kidotube`), and reloads Nginx.
+- Secrets Required in GitHub Repository:
+  - `SSH_PRIVATE_KEY`: Content of the EC2 private key (`portfolio-website.pem`).
+
