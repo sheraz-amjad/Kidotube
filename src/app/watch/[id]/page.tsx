@@ -147,11 +147,13 @@ function WatchContent({ videoId }: { videoId: string }) {
 
               <div className={`${styles.playerWrapper} ${theaterMode ? styles.playerTheater : ''}`}>
                 <iframe
+                  key={video.youtubeId}
                   id={`yt-player-${video.id}`}
                   className={styles.player}
-                  src={`https://www.youtube.com/embed/${video.youtubeId}?rel=0&modestbranding=1&playsinline=1&color=white`}
+                  src={`https://www.youtube-nocookie.com/embed/${video.youtubeId}?rel=0&modestbranding=1&playsinline=1&enablejsapi=1`}
                   title={video.title}
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  referrerPolicy="strict-origin-when-cross-origin"
                   allowFullScreen
                 />
               </div>
@@ -198,6 +200,16 @@ function WatchContent({ videoId }: { videoId: string }) {
                     >
                       <span>{theaterMode ? '🖥️ Standard' : '🎬 Big Screen'}</span>
                     </button>
+
+                    <a
+                      href={`https://www.youtube.com/watch?v=${video.youtubeId}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={styles.actionPill}
+                      title="Watch on YouTube directly"
+                    >
+                      <span>▶️ YouTube App</span>
+                    </a>
                   </div>
                 </div>
 
