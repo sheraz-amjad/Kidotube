@@ -1,0 +1,625 @@
+/* ============================================================
+   PIN Login
+   ============================================================ */
+.pinPage {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #EEF0FF 0%, #FFE5EF 50%, #FFF8D6 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.pinCard {
+  background: white;
+  border-radius: 32px;
+  padding: 48px 40px;
+  text-align: center;
+  max-width: 380px;
+  width: 100%;
+  box-shadow: 0 24px 64px rgba(0,0,0,0.12);
+  animation: fadeInUp 0.5s ease;
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.shake {
+  animation: shakeAnim 0.5s ease;
+}
+
+@keyframes shakeAnim {
+  0%, 100% { transform: translateX(0); }
+  20%       { transform: translateX(-10px); }
+  40%       { transform: translateX(10px); }
+  60%       { transform: translateX(-8px); }
+  80%       { transform: translateX(8px); }
+}
+
+.pinLock {
+  font-size: 56px;
+  margin-bottom: 16px;
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-6px); }
+}
+
+.pinTitle {
+  font-family: 'Fredoka One', cursive;
+  font-size: 28px;
+  color: #1A1A2E;
+  margin-bottom: 8px;
+}
+
+.pinSubtitle {
+  font-size: 14px;
+  color: #6B7280;
+  margin-bottom: 4px;
+}
+
+.hint {
+  font-size: 12px;
+  color: #9CA3AF;
+  margin-bottom: 24px;
+}
+
+.pinDots {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.pinDot {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 2px solid #D1D5DB;
+  background: transparent;
+  transition: background 0.2s, border-color 0.2s, transform 0.2s;
+}
+
+.pinDotFilled {
+  background: #6C63FF;
+  border-color: #6C63FF;
+  transform: scale(1.2);
+}
+
+.pinError {
+  color: #DC2626;
+  font-size: 13px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.numPad {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin: 16px 0 24px;
+}
+
+.numKey {
+  height: 56px;
+  background: #F3F4F6;
+  border: 2px solid #E5E7EB;
+  border-radius: 12px;
+  font-family: 'Fredoka One', cursive;
+  font-size: 22px;
+  color: #1A1A2E;
+  cursor: pointer;
+  transition: background 0.15s, transform 0.1s, box-shadow 0.15s;
+}
+
+.numKey:hover:not(:disabled) {
+  background: #EEF0FF;
+  border-color: #6C63FF;
+  transform: scale(1.05);
+}
+
+.numKey:active:not(:disabled) {
+  transform: scale(0.95);
+}
+
+.numKeyEmpty {
+  background: transparent;
+  border-color: transparent;
+  cursor: default;
+}
+
+.backLink {
+  font-size: 13px;
+  color: #6B7280;
+  text-decoration: none;
+  font-weight: 600;
+  display: block;
+}
+.backLink:hover { color: #6C63FF; }
+
+/* ============================================================
+   Dashboard
+   ============================================================ */
+.dashboard {
+  min-height: 100vh;
+  background: #F8FAFC;
+}
+
+.dashHeader {
+  background: linear-gradient(135deg, #1A1A2E, #2D2D5E);
+  padding: 24px 0;
+}
+
+.dashHeaderInner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.dashTitle {
+  font-family: 'Fredoka One', cursive;
+  font-size: 28px;
+  color: white;
+  margin-bottom: 4px;
+}
+
+.dashSub {
+  font-size: 14px;
+  color: rgba(255,255,255,0.7);
+}
+
+.dashHeaderRight {
+  display: flex;
+  gap: 12px;
+}
+
+.viewSiteBtn, .lockBtn {
+  padding: 10px 20px;
+  border-radius: 10px;
+  font-weight: 700;
+  font-size: 14px;
+  text-decoration: none;
+  cursor: pointer;
+  border: none;
+  transition: transform 0.2s, opacity 0.2s;
+}
+
+.viewSiteBtn {
+  background: rgba(255,255,255,0.15);
+  color: white;
+  border: 1px solid rgba(255,255,255,0.3);
+}
+.viewSiteBtn:hover { background: rgba(255,255,255,0.25); }
+
+.lockBtn {
+  background: #FF6B6B;
+  color: white;
+}
+.lockBtn:hover { opacity: 0.9; transform: scale(1.03); }
+
+.dashContent {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 32px 24px;
+}
+
+/* Stats */
+.statGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 16px;
+  margin-bottom: 32px;
+}
+
+.statCard {
+  background: white;
+  border-radius: 16px;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  border: 2px solid #F0F0F0;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  border-left: 4px solid var(--accent);
+  transition: transform 0.2s;
+}
+.statCard:hover { transform: translateY(-2px); }
+
+.statIcon { font-size: 32px; }
+.statValue { font-family: 'Fredoka One', cursive; font-size: 28px; color: #1A1A2E; line-height: 1; }
+.statLabel { font-size: 13px; color: #9CA3AF; font-weight: 600; }
+
+/* Panels */
+.panelGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.panel {
+  background: white;
+  border-radius: 20px;
+  padding: 24px;
+  border: 2px solid #F0F0F0;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.panelFull { grid-column: 1 / -1; }
+
+.panelTitle {
+  font-family: 'Fredoka One', cursive;
+  font-size: 20px;
+  color: #1A1A2E;
+  margin-bottom: 16px;
+}
+
+.panelTitleRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+.panelTitleRow .panelTitle { margin-bottom: 0; }
+
+/* Screen Time */
+.timeBar {
+  height: 12px;
+  background: #F3F4F6;
+  border-radius: 99px;
+  overflow: hidden;
+  margin-bottom: 8px;
+}
+
+.timeBarFill {
+  height: 100%;
+  border-radius: 99px;
+  transition: width 0.5s ease, background 0.3s;
+}
+
+.timeText {
+  font-size: 13px;
+  color: #6B7280;
+  margin-bottom: 16px;
+}
+
+.timeOptions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+}
+
+.timeOption {
+  padding: 8px 16px;
+  border-radius: 10px;
+  border: 2px solid #E5E7EB;
+  background: #F9FAFB;
+  font-size: 14px;
+  font-weight: 700;
+  color: #374151;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.timeOption:hover { border-color: #6C63FF; color: #6C63FF; }
+.timeOptionActive {
+  background: #EEF0FF;
+  border-color: #6C63FF;
+  color: #6C63FF;
+}
+
+.bonusBtn {
+  background: linear-gradient(135deg, #FFD93D, #FFB800);
+  color: #7A5F00;
+  border: none;
+  font-weight: 800;
+  font-size: 13px;
+  padding: 8px 16px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+.bonusBtn:hover { transform: scale(1.04); }
+
+/* Category Toggle */
+.catGrid {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.catToggle {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 10px 14px;
+  border-radius: 12px;
+  border: 2px solid #F0F0F0;
+  background: #F9FAFB;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-align: left;
+}
+.catToggle:hover { border-color: #6C63FF; }
+.catBlocked { background: #FFF5F5; border-color: #FF6B6B; }
+.catStatus { margin-left: auto; }
+
+/* Bedtime and Age */
+.scheduleRow {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.scheduleBtn {
+  background: #F9FAFB;
+  border: 2px solid #E5E7EB;
+  border-radius: 10px;
+  padding: 8px 14px;
+  font-size: 13px;
+  font-weight: 700;
+  color: #374151;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.scheduleBtn:hover { border-color: #6C63FF; }
+.scheduleActive {
+  background: #4C1D95;
+  color: white;
+  border-color: #4C1D95;
+}
+
+/* History */
+.clearBtn {
+  background: #FFF5F5;
+  color: #DC2626;
+  font-size: 13px;
+  font-weight: 700;
+  padding: 6px 14px;
+  border-radius: 8px;
+  border: 1px solid #FECACA;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.clearBtn:hover { background: #FECACA; }
+
+.emptyHistory {
+  text-align: center;
+  padding: 40px;
+  color: #9CA3AF;
+}
+.emptyHistory span { font-size: 40px; display: block; margin-bottom: 8px; }
+
+.historyList { display: flex; flex-direction: column; gap: 8px; }
+
+.historyItem {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  border-radius: 12px;
+  border: 1px solid #F0F0F0;
+  background: #FAFAFA;
+}
+
+.historyIcon { font-size: 24px; }
+.historyTitle { font-size: 14px; font-weight: 700; color: #1A1A2E; margin-bottom: 2px; }
+.historyMeta  { font-size: 12px; color: #9CA3AF; text-transform: capitalize; }
+
+/* Change PIN Box */
+.pinChangeBox {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.pinInput {
+  width: 140px;
+  padding: 8px 12px;
+  border: 2px solid #E5E7EB;
+  border-radius: 10px;
+  font-size: 15px;
+  font-weight: 700;
+  text-align: center;
+  outline: none;
+}
+.pinInput:focus { border-color: #6C63FF; }
+
+.savePinBtn {
+  background: #6C63FF;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 10px;
+  font-weight: 700;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+/* Category Progress Bars */
+.catProgItem {
+  margin-bottom: 12px;
+}
+.catProgHeader {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+.catProgBar {
+  height: 8px;
+  background: #F3F4F6;
+  border-radius: 99px;
+  overflow: hidden;
+}
+.catProgFill {
+  height: 100%;
+  border-radius: 99px;
+  transition: width 0.4s ease;
+}
+
+/* Reminders & Kids Corner */
+.reminderList {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.reminderItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 14px;
+  background: #F8FAFC;
+  border: 1px solid #E2E8F0;
+  border-radius: 12px;
+  gap: 12px;
+}
+
+.reminderInfo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.reminderTime {
+  font-family: 'Fredoka One', cursive;
+  font-size: 16px;
+  color: #4F46E5;
+  background: #EEF2FF;
+  padding: 4px 8px;
+  border-radius: 8px;
+}
+
+.reminderTitle {
+  font-size: 14px;
+  font-weight: 700;
+  color: #1E293B;
+}
+
+.reminderMeta {
+  font-size: 11px;
+  color: #64748B;
+}
+
+.reminderActions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.reminderToggleBtn {
+  border: none;
+  border-radius: 99px;
+  padding: 4px 10px;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.reminderToggleActive {
+  background: #DCFCE7;
+  color: #15803D;
+}
+
+.reminderToggleInactive {
+  background: #F1F5F9;
+  color: #94A3B8;
+}
+
+.deleteRemBtn {
+  background: none;
+  border: none;
+  color: #EF4444;
+  font-size: 15px;
+  cursor: pointer;
+  padding: 4px 6px;
+  border-radius: 6px;
+}
+.deleteRemBtn:hover {
+  background: #FEE2E2;
+}
+
+.newRemBox {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  background: #F1F5F9;
+  padding: 14px;
+  border-radius: 14px;
+}
+
+.remInputRow {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.remInput {
+  flex: 1;
+  min-width: 140px;
+  padding: 8px 12px;
+  border: 1.5px solid #CBD5E1;
+  border-radius: 8px;
+  font-size: 13px;
+  outline: none;
+  background: white;
+}
+.remInput:focus { border-color: #4F46E5; }
+
+.addRemBtn {
+  background: #4F46E5;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 13px;
+  cursor: pointer;
+  align-self: flex-start;
+}
+
+.optInBox {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #FDF2F8;
+  border: 2px solid #FBCFE8;
+  padding: 16px 20px;
+  border-radius: 16px;
+  margin-top: 12px;
+  gap: 16px;
+}
+
+.optInBtn {
+  padding: 10px 20px;
+  border-radius: 99px;
+  font-weight: 800;
+  font-size: 14px;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.15s;
+}
+.optInBtn:hover { transform: scale(1.05); }
+
+/* Responsive */
+@media (max-width: 768px) {
+  .panelGrid { grid-template-columns: 1fr; }
+  .panelFull { grid-column: auto; }
+}
+

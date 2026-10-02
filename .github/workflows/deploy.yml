@@ -1,0 +1,59 @@
+name: Deploy KidoTube to Production
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 🛎️ Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: 🟢 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: 'npm'
+
+      - name: 📦 Install Dependencies
+        run: npm ci
+
+      - name: 🏗️ Build Next.js Application
+        run: npm run build
+
+      - name: 📂 Prepare Server Directory
+        uses: appleboy/ssh-action@v1.2.0
+        with:
+          host: 15.252.239.115
+          username: ubuntu
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            mkdir -p /var/www/kidotube
+
+      - name: 🚀 Sync Files to EC2 Server
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: 15.252.239.115
+          username: ubuntu
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          source: ".next,public,package.json,package-lock.json,next.config.ts"
+          target: "/var/www/kidotube"
+          overwrite: true
+
+      - name: 🔄 Install Production Dependencies & Reload PM2
+        uses: appleboy/ssh-action@v1.2.0
+        with:
+          host: 15.252.239.115
+          username: ubuntu
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            cd /var/www/kidotube
+            npm ci --omit=dev
+            pm2 describe kidotube > /dev/null 2>&1 && pm2 reload kidotube || pm2 start npm --name "kidotube" -- start -- -p 3000
+            pm2 save
+            sudo nginx -t && sudo systemctl reload nginx
+            echo "🎉 KidoTube is live on https://kidotube.syedsheraz.me !"

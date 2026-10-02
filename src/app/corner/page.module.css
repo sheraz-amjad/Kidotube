@@ -1,0 +1,239 @@
+.page {
+  min-height: 100vh;
+  background: var(--bg);
+  color: var(--text-dark);
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 24px 20px 60px;
+}
+
+.hero {
+  background: linear-gradient(135deg, #FF6B9D, #FF9F43, #FFD93D);
+  color: white;
+  border-radius: 28px;
+  padding: 40px 24px;
+  text-align: center;
+  margin-bottom: 28px;
+  box-shadow: 0 12px 36px rgba(255, 107, 157, 0.25);
+}
+
+.heroTitle {
+  font-family: 'Fredoka One', cursive;
+  font-size: 38px;
+  margin-bottom: 8px;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.heroSub {
+  font-size: 16px;
+  opacity: 0.95;
+  max-width: 620px;
+  margin: 0 auto 16px;
+  line-height: 1.5;
+}
+
+.safetyPills {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.safetyPill {
+  background: rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  color: white;
+  font-weight: 800;
+  font-size: 12px;
+  padding: 6px 14px;
+  border-radius: 99px;
+}
+
+/* Weekly Challenge Card */
+.challengeBanner {
+  background: linear-gradient(135deg, #1E1B4B, #312E81);
+  color: white;
+  border-radius: 20px;
+  padding: 24px 28px;
+  margin-bottom: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  box-shadow: 0 8px 24px rgba(30, 27, 75, 0.2);
+  flex-wrap: wrap;
+}
+
+.challengeTitle {
+  font-family: 'Fredoka One', cursive;
+  font-size: 22px;
+  color: #FEF08A;
+  margin-bottom: 4px;
+}
+
+.challengeDesc {
+  font-size: 14px;
+  color: #E0E7FF;
+}
+
+.challengeBtn {
+  background: linear-gradient(135deg, #EC4899, #F43F5E);
+  color: white;
+  font-family: 'Fredoka One', cursive;
+  font-size: 15px;
+  padding: 12px 24px;
+  border-radius: 14px;
+  text-decoration: none;
+  box-shadow: 0 4px 14px rgba(236, 72, 153, 0.35);
+  transition: transform 0.2s;
+  white-space: nowrap;
+}
+.challengeBtn:hover { transform: scale(1.05); }
+
+/* Wall Grid */
+.cornerGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 24px;
+}
+
+.postCard {
+  background: var(--bg-card);
+  border: 2px solid var(--border);
+  border-radius: 22px;
+  overflow: hidden;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.2s, box-shadow 0.2s;
+  position: relative;
+}
+.postCard:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+}
+
+.featuredBadge {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  z-index: 10;
+  background: linear-gradient(135deg, #FFD93D, #FFB800);
+  color: #713F12;
+  font-weight: 800;
+  font-size: 11px;
+  padding: 4px 12px;
+  border-radius: 99px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+.postArtworkWrapper {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  background: #F8FAFC;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 1px solid var(--border);
+  overflow: hidden;
+}
+
+.postArtwork {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.artworkPlaceholder {
+  font-size: 56px;
+}
+
+.postBody {
+  padding: 18px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.authorRow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.authorAvatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--bg-secondary);
+  border: 2px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+}
+
+.authorName {
+  font-size: 14px;
+  font-weight: 800;
+  color: var(--text-dark);
+}
+
+.postCategory {
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+.postTitle {
+  font-family: 'Fredoka One', cursive;
+  font-size: 18px;
+  color: var(--text-dark);
+  line-height: 1.3;
+}
+
+/* Preset Sticker Reactions */
+.stickerBar {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  padding-top: 10px;
+  border-top: 1px solid var(--border);
+}
+
+.stickerBtn {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: 99px;
+  padding: 4px 10px;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  transition: all 0.15s ease;
+}
+.stickerBtn:hover {
+  transform: scale(1.1);
+  background: var(--yellow-light);
+  border-color: var(--yellow);
+}
+
+.optInNotice {
+  background: #FEF3C7;
+  border: 2px solid #FCD34D;
+  border-radius: 20px;
+  padding: 24px;
+  text-align: center;
+  margin-bottom: 24px;
+  color: #92400E;
+}
+.optInTitle {
+  font-family: 'Fredoka One', cursive;
+  font-size: 20px;
+  margin-bottom: 6px;
+}

@@ -1,0 +1,118 @@
+.page { min-height: 100vh; background: #FFF8F0; }
+
+.banner {
+  padding: 48px 0 40px;
+  text-align: center;
+  color: white;
+  position: relative;
+  overflow: hidden;
+}
+
+.banner::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.1);
+}
+
+.bannerInner {
+  position: relative;
+  z-index: 1;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.back {
+  display: inline-block;
+  position: absolute;
+  top: 0;
+  left: 24px;
+  color: rgba(255,255,255,0.8);
+  font-weight: 700;
+  font-size: 15px;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.back:hover { color: white; }
+
+.bannerIcon {
+  font-size: 64px;
+  margin-bottom: 12px;
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-8px); }
+}
+
+.bannerTitle {
+  font-family: 'Fredoka One', cursive;
+  font-size: 40px;
+  margin-bottom: 8px;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+
+.bannerDesc {
+  font-size: 16px;
+  opacity: 0.9;
+  margin-bottom: 12px;
+}
+
+.bannerCount {
+  background: rgba(255,255,255,0.25);
+  backdrop-filter: blur(8px);
+  padding: 4px 16px;
+  border-radius: 99px;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.section { padding: 48px 0; }
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 20px;
+}
+
+.empty {
+  text-align: center;
+  padding: 80px 24px;
+  animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.emptyEmoji { font-size: 64px; display: block; margin-bottom: 16px; }
+.empty h2 { font-family: 'Fredoka One', cursive; font-size: 24px; margin-bottom: 8px; }
+.empty p { color: #6B7280; margin-bottom: 24px; }
+
+.homeBtn {
+  display: inline-block;
+  background: linear-gradient(135deg, #6C63FF, #8B7FFF);
+  color: white;
+  font-weight: 700;
+  padding: 12px 24px;
+  border-radius: 12px;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.filterOutline {
+  background: white !important;
+  color: #4B5563 !important;
+  border: 2px solid #E5E7EB !important;
+}

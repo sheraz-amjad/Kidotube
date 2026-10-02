@@ -1,0 +1,922 @@
+.page { min-height: 100vh; background: #FFF8F0; }
+
+.container {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 24px 20px 60px;
+}
+
+.back {
+  display: inline-block;
+  color: #6C63FF;
+  font-weight: 700;
+  text-decoration: none;
+  margin-bottom: 20px;
+  font-size: 14px;
+  transition: transform 0.2s;
+}
+.back:hover { transform: translateX(-4px); }
+
+/* Game Header */
+.gameHeader {
+  border-radius: 24px;
+  padding: 32px 24px;
+  text-align: center;
+  color: white;
+  margin-bottom: 24px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+}
+
+.gameHeaderEmoji {
+  font-size: 64px;
+  display: block;
+  margin-bottom: 8px;
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-8px); }
+}
+
+.gameHeaderTitle {
+  font-family: 'Fredoka One', cursive;
+  font-size: 32px;
+  margin-bottom: 8px;
+}
+
+.gameHeaderDesc {
+  font-size: 15px;
+  opacity: 0.95;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+/* Win Banner */
+.winBanner {
+  background: linear-gradient(135deg, #FFD93D, #FFB800);
+  color: #7A5F00;
+  font-weight: 800;
+  font-size: 18px;
+  padding: 16px 24px;
+  border-radius: 16px;
+  text-align: center;
+  margin-bottom: 24px;
+  animation: bounceIn 0.5s ease;
+  box-shadow: 0 6px 20px rgba(255, 217, 61, 0.4);
+}
+
+@keyframes bounceIn {
+  0%   { transform: scale(0.5); opacity: 0; }
+  60%  { transform: scale(1.1); }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+/* Game Stats */
+.gameStats {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+}
+
+.statBadge {
+  background: white;
+  border: 2px solid #E5E7EB;
+  padding: 8px 18px;
+  border-radius: 99px;
+  font-weight: 700;
+  font-size: 14px;
+  color: #1A1A2E;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+}
+
+/* ============================================================
+   Memory Match
+   ============================================================ */
+.memoryGame { display: flex; flex-direction: column; align-items: center; }
+
+.memGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+  margin-bottom: 24px;
+}
+
+.memCard {
+  width: 84px;
+  height: 84px;
+  perspective: 600px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+}
+
+.memCardInner {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.4s ease;
+  border-radius: 16px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.06);
+}
+
+.memFlipped .memCardInner {
+  transform: rotateY(180deg);
+}
+
+.memFront, .memBack {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 16px;
+  font-size: 28px;
+  backface-visibility: hidden;
+}
+
+.memFront {
+  background: linear-gradient(135deg, #6C63FF, #8B7FFF);
+  color: white;
+  font-size: 26px;
+}
+
+.memBack {
+  background: white;
+  border: 3px solid #6C63FF;
+  transform: rotateY(180deg);
+}
+
+.memMatched .memBack {
+  background: #E3F7E6;
+  border-color: #6BCB77;
+}
+
+.memMatched .memCardInner {
+  animation: matchPop 0.4s ease;
+}
+
+@keyframes matchPop {
+  0%   { transform: rotateY(180deg) scale(1); }
+  50%  { transform: rotateY(180deg) scale(1.15); }
+  100% { transform: rotateY(180deg) scale(1); }
+}
+
+/* Win Screen */
+.winScreen {
+  text-align: center;
+  padding: 48px;
+  background: white;
+  border-radius: 24px;
+  border: 2px solid #6C63FF;
+  box-shadow: 0 12px 36px rgba(108, 99, 255, 0.12);
+  margin-bottom: 20px;
+}
+
+.winEmoji {
+  font-size: 80px;
+  margin-bottom: 16px;
+  animation: bounceIn 0.5s ease;
+}
+
+.winTitle {
+  font-family: 'Fredoka One', cursive;
+  font-size: 36px;
+  color: #6C63FF;
+  margin-bottom: 8px;
+}
+
+.winMoves {
+  font-size: 16px;
+  color: #6B7280;
+  margin-bottom: 24px;
+}
+
+.playAgainBtn {
+  background: linear-gradient(135deg, #6C63FF, #8B7FFF);
+  color: white;
+  font-size: 16px;
+  font-weight: 700;
+  padding: 14px 28px;
+  border-radius: 12px;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.2s;
+  box-shadow: 0 4px 14px rgba(108, 99, 255, 0.3);
+}
+.playAgainBtn:hover { transform: scale(1.05); }
+
+.resetBtn {
+  background: #F3F4F6;
+  color: #374151;
+  font-size: 14px;
+  font-weight: 700;
+  padding: 10px 20px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.resetBtn:hover { background: #E5E7EB; }
+
+/* ============================================================
+   Math Quiz
+   ============================================================ */
+.mathGame {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.mathCard {
+  background: white;
+  border-radius: 24px;
+  padding: 40px;
+  text-align: center;
+  border: 3px solid #E5E7EB;
+  max-width: 480px;
+  width: 100%;
+  transition: border-color 0.3s, background 0.3s;
+  margin-bottom: 16px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+}
+
+.mathCard.correct { border-color: #6BCB77; background: #E3F7E6; }
+.mathCard.wrong   { border-color: #FF6B6B; background: #FFE8E8; }
+
+.mathQ {
+  font-family: 'Fredoka One', cursive;
+  font-size: 44px;
+  color: #1A1A2E;
+  margin-bottom: 24px;
+}
+
+.mathInput {
+  width: 100%;
+  font-size: 26px;
+  font-family: 'Fredoka One', cursive;
+  text-align: center;
+  padding: 14px;
+  border: 3px solid #E5E7EB;
+  border-radius: 16px;
+  margin-bottom: 16px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+.mathInput:focus { border-color: #6C63FF; }
+
+.hint {
+  font-size: 14px;
+  color: #9CA3AF;
+  text-align: center;
+}
+
+/* ============================================================
+   Spelling Bee
+   ============================================================ */
+.spellingGame {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.spellingCard {
+  background: white;
+  border-radius: 24px;
+  padding: 40px;
+  text-align: center;
+  border: 3px solid #E5E7EB;
+  max-width: 480px;
+  width: 100%;
+  margin-bottom: 16px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+}
+
+.spellingHint { font-size: 72px; display: block; margin-bottom: 8px; animation: float 3s ease-in-out infinite; }
+.spellingClue { font-size: 16px; color: #6B7280; margin-bottom: 20px; font-weight: 600; }
+
+.answerRow, .letterRow {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+}
+
+.answerTile, .letterTile {
+  width: 50px;
+  height: 50px;
+  border-radius: 12px;
+  font-family: 'Fredoka One', cursive;
+  font-size: 24px;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.15s;
+}
+
+.answerTile {
+  background: #EEF0FF;
+  color: #6C63FF;
+  border: 2px solid #6C63FF;
+}
+.answerTile:hover { transform: scale(1.1); }
+
+.letterTile {
+  background: #F3F4F6;
+  color: #1A1A2E;
+  border: 2px solid #E5E7EB;
+}
+.letterTile:hover { transform: scale(1.1); background: #E5E7EB; }
+
+.emptyTile {
+  width: 50px;
+  height: 50px;
+  border-radius: 12px;
+  border: 2px dashed #D1D5DB;
+  background: #F9FAFB;
+}
+
+/* ============================================================
+   Coloring Book Game
+   ============================================================ */
+.coloringGame {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.coloringCard {
+  background: white;
+  border-radius: 24px;
+  padding: 24px;
+  border: 3px solid #FFE5EF;
+  max-width: 680px;
+  width: 100%;
+  box-shadow: 0 10px 30px rgba(255, 107, 157, 0.12);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.templateRow {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 100%;
+}
+
+.templateLabel {
+  font-size: 13px;
+  font-weight: 700;
+  color: #6B7280;
+}
+
+.templateBtn {
+  background: #F9FAFB;
+  border: 2px solid #E5E7EB;
+  border-radius: 99px;
+  padding: 6px 14px;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.2s;
+}
+
+.templateBtn:hover, .templateActive {
+  background: #FFE5EF;
+  border-color: #FF6B9D;
+  color: #E11D48;
+}
+
+.canvasContainer {
+  position: relative;
+  background: #FFFFFF;
+  border: 3px solid #E5E7EB;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: inset 0 2px 6px rgba(0,0,0,0.04);
+  touch-action: none;
+}
+
+.coloringCanvas {
+  display: block;
+  background: #FFFFFF;
+  cursor: crosshair;
+}
+
+.toolSection {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+}
+
+.paletteRow {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.colorSwatch {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 2px solid white;
+  outline: 2px solid #E5E7EB;
+  cursor: pointer;
+  transition: transform 0.15s, outline-color 0.15s;
+}
+
+.colorSwatch:hover { transform: scale(1.15); }
+.swatchActive {
+  outline: 3px solid #1E293B;
+  transform: scale(1.2);
+}
+
+.brushRow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.sizeBtn {
+  background: #F3F4F6;
+  border: 2px solid #E5E7EB;
+  border-radius: 10px;
+  padding: 6px 12px;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.sizeActive {
+  background: #6C63FF;
+  color: white;
+  border-color: #6C63FF;
+}
+
+.stampsRow {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.stampBtn {
+  font-size: 20px;
+  background: #F9FAFB;
+  border: 2px solid #E5E7EB;
+  border-radius: 10px;
+  padding: 4px 8px;
+  cursor: pointer;
+  transition: transform 0.15s;
+}
+
+.stampBtn:hover { transform: scale(1.2); }
+.stampActive {
+  border-color: #FFD93D;
+  background: #FFF8D6;
+  transform: scale(1.15);
+}
+
+.canvasActions {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  width: 100%;
+}
+
+.actionBtn {
+  background: #F3F4F6;
+  border: 2px solid #E5E7EB;
+  border-radius: 10px;
+  padding: 8px 16px;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.actionBtn:hover { background: #E5E7EB; }
+
+.saveArtBtn {
+  background: linear-gradient(135deg, #FF6B9D, #FF8FAF);
+  color: white;
+  border: none;
+  box-shadow: 0 4px 12px rgba(255, 107, 157, 0.3);
+}
+.saveArtBtn:hover { transform: translateY(-2px); }
+
+/* ============================================================
+   Animal Puzzle Game
+   ============================================================ */
+.puzzleGame {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.puzzleCard {
+  background: white;
+  border-radius: 24px;
+  padding: 32px;
+  border: 3px solid #E3F7E6;
+  max-width: 520px;
+  width: 100%;
+  box-shadow: 0 10px 30px rgba(107, 203, 119, 0.12);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.animalPicker {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+}
+
+.animalOption {
+  background: #F9FAFB;
+  border: 2px solid #E5E7EB;
+  border-radius: 12px;
+  padding: 6px 14px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.animalOptionActive {
+  background: #E3F7E6;
+  border-color: #6BCB77;
+  color: #15803D;
+}
+
+.puzzleGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  background: #F3F4F6;
+  padding: 12px;
+  border-radius: 16px;
+  border: 2px solid #E5E7EB;
+}
+
+.puzzleTile {
+  width: 90px;
+  height: 90px;
+  border-radius: 12px;
+  background: white;
+  border: 3px solid #E5E7EB;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 32px;
+  font-family: 'Fredoka One', cursive;
+  position: relative;
+  transition: transform 0.15s, border-color 0.15s;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.05);
+}
+
+.puzzleTile:hover {
+  transform: scale(1.05);
+  border-color: #6BCB77;
+}
+
+.tileSelected {
+  border-color: #FFD93D !important;
+  background: #FFF8D6 !important;
+  transform: scale(1.08) !important;
+  box-shadow: 0 6px 16px rgba(255, 217, 61, 0.4);
+}
+
+.tileNum {
+  position: absolute;
+  top: 4px;
+  left: 6px;
+  font-size: 11px;
+  color: #94A3B8;
+  font-weight: 800;
+}
+
+/* ============================================================
+   Balloon Pop Game
+   ============================================================ */
+.balloonGame {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.balloonCard {
+  background: linear-gradient(180deg, #74b9ff, #dfe6e9 90%);
+  border-radius: 24px;
+  padding: 20px;
+  width: 100%;
+  max-width: 600px;
+  height: 440px;
+  position: relative;
+  overflow: hidden;
+  border: 3px solid #00CEC9;
+  box-shadow: 0 12px 36px rgba(0, 206, 201, 0.2);
+}
+
+.cloud1, .cloud2, .cloud3 {
+  position: absolute;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 40px;
+  user-select: none;
+}
+.cloud1 { top: 20px; left: 10%; animation: floatSlow 12s linear infinite; }
+.cloud2 { top: 60px; right: 15%; animation: floatSlow 16s linear infinite reverse; }
+.cloud3 { top: 120px; left: 40%; animation: floatSlow 20s linear infinite; }
+
+@keyframes floatSlow {
+  from { transform: translateX(-40px); }
+  to { transform: translateX(40px); }
+}
+
+.balloonItem {
+  position: absolute;
+  background: transparent;
+  border: none;
+  font-size: 48px;
+  cursor: pointer;
+  transition: transform 0.1s;
+  user-select: none;
+  animation: balloonWiggle 2s ease-in-out infinite alternate;
+}
+
+.balloonItem:hover {
+  transform: scale(1.2);
+}
+
+@keyframes balloonWiggle {
+  from { transform: rotate(-5deg); }
+  to   { transform: rotate(5deg); }
+}
+
+.popOverlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(4px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 20;
+}
+
+/* Shared */
+.checkBtn {
+  background: linear-gradient(135deg, #6BCB77, #4CAF50);
+  color: white;
+  font-size: 16px;
+  font-weight: 700;
+  padding: 12px 28px;
+  border-radius: 12px;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.2s;
+  margin-top: 8px;
+  box-shadow: 0 4px 12px rgba(107, 203, 119, 0.3);
+}
+.checkBtn:hover:not(:disabled) { transform: scale(1.05); }
+.checkBtn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+.feedback { color: #2D8A3E; font-weight: 700; margin-top: 12px; font-size: 16px; }
+.feedbackWrong { color: #DC2626; font-weight: 700; margin-top: 12px; font-size: 16px; }
+
+.comingSoon {
+  text-align: center;
+  padding: 64px;
+  background: white;
+  border-radius: 24px;
+  border: 2px solid #F0F0F0;
+}
+.comingSoon span { font-size: 64px; display: block; margin-bottom: 16px; }
+.comingSoon h2   { font-family: 'Fredoka One', cursive; font-size: 28px; margin-bottom: 8px; }
+.comingSoon p    { color: #6B7280; margin-bottom: 24px; }
+
+.backBtn {
+  display: inline-block;
+  background: linear-gradient(135deg, #6C63FF, #8B7FFF);
+  color: white;
+  font-weight: 700;
+  padding: 12px 24px;
+  border-radius: 12px;
+  text-decoration: none;
+}
+
+.error {
+  text-align: center;
+  padding: 80px;
+}
+.error span { font-size: 64px; display: block; margin-bottom: 12px; }
+.error h2   { font-family: 'Fredoka One', cursive; font-size: 24px; margin-bottom: 8px; }
+.error a    { color: #6C63FF; font-weight: 700; }
+
+/* ============================================================
+   Magic Piano
+   ============================================================ */
+.pianoGame {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.pianoCard {
+  background: white;
+  border-radius: 24px;
+  padding: 32px 24px;
+  border: 3px solid #DDD6FE;
+  box-shadow: 0 12px 36px rgba(108, 92, 231, 0.15);
+  max-width: 700px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.songSelector {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.songBtn {
+  background: #F3F4F6;
+  border: 2px solid #E5E7EB;
+  border-radius: 99px;
+  padding: 8px 16px;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.songBtnActive {
+  background: #6C5CE7;
+  color: white;
+  border-color: #6C5CE7;
+}
+
+.songGuide {
+  background: #F5F3FF;
+  border: 2px dashed #A78BFA;
+  padding: 12px 20px;
+  border-radius: 16px;
+  font-weight: 700;
+  color: #4C1D95;
+  text-align: center;
+  font-size: 15px;
+}
+
+.pianoKeys {
+  display: flex;
+  gap: 6px;
+  justify-content: center;
+  padding: 16px;
+  background: #1E1B4B;
+  border-radius: 20px;
+  box-shadow: inset 0 4px 12px rgba(0,0,0,0.4);
+}
+
+.pianoKey {
+  width: 64px;
+  height: 190px;
+  border-radius: 0 0 12px 12px;
+  border: 2px solid #FFFFFF;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding-bottom: 16px;
+  align-items: center;
+  color: white;
+  font-weight: 800;
+  font-family: 'Fredoka One', cursive;
+  font-size: 16px;
+  transition: transform 0.1s, filter 0.1s;
+  box-shadow: 0 6px 14px rgba(0,0,0,0.3);
+}
+
+.pianoKey:hover { transform: translateY(4px); filter: brightness(1.1); }
+.pianoKeyActive {
+  transform: translateY(8px) scale(0.98);
+  box-shadow: 0 0 20px #FFD93D;
+  filter: brightness(1.25);
+}
+
+.keySolfege {
+  font-size: 11px;
+  opacity: 0.9;
+  text-transform: uppercase;
+}
+
+/* ============================================================
+   Dino Runner Game
+   ============================================================ */
+.dinoGame {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.dinoCard {
+  background: white;
+  border-radius: 24px;
+  padding: 24px;
+  border: 3px solid #00B894;
+  box-shadow: 0 12px 36px rgba(0, 184, 148, 0.15);
+  max-width: 680px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.dinoCanvas {
+  background: linear-gradient(180deg, #E0F2FE 0%, #FEF08A 70%, #86EFAC 100%);
+  border-radius: 16px;
+  border: 3px solid #34D399;
+  display: block;
+  cursor: pointer;
+}
+
+/* ============================================================
+   Fruit Catcher Game
+   ============================================================ */
+.fruitGame {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.fruitCard {
+  background: white;
+  border-radius: 24px;
+  padding: 24px;
+  border: 3px solid #FF7675;
+  box-shadow: 0 12px 36px rgba(255, 118, 117, 0.15);
+  max-width: 680px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.fruitCanvas {
+  background: linear-gradient(180deg, #FEF08A 0%, #BAE6FD 50%, #BBF7D0 100%);
+  border-radius: 16px;
+  border: 3px solid #FCA5A5;
+  display: block;
+  cursor: pointer;
+}
+
+.catcherControls {
+  display: flex;
+  gap: 24px;
+  width: 100%;
+  justify-content: center;
+}
+
+.catcherBtn {
+  background: linear-gradient(135deg, #FF7675, #D63031);
+  color: white;
+  font-family: 'Fredoka One', cursive;
+  font-size: 20px;
+  padding: 12px 32px;
+  border-radius: 16px;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(214, 48, 49, 0.3);
+  transition: transform 0.1s;
+}
+.catcherBtn:active { transform: scale(0.95); }
+
