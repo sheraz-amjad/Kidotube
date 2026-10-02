@@ -116,6 +116,12 @@ body {
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
+@media (max-width: 768px) {
+  body {
+    padding-bottom: 72px;
+  }
+}
+
 h1, h2, h3 {
   font-family: var(--font-heading);
   line-height: 1.2;
