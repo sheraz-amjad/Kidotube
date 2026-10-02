@@ -240,6 +240,12 @@ export default function ChildHeader() {
               <span className={styles.starCount}>{stars}</span>
             </div>
 
+            {/* Download App link */}
+            <Link href="/download" className={styles.navLink} title="Get Mobile App">
+              <span>📱</span>
+              <span>App</span>
+            </Link>
+
             {/* Parents link */}
             <Link href="/parent" className={styles.parentBtn}>
               <span>👨‍👩‍👧</span>
